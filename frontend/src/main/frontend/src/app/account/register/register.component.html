@@ -39,16 +39,16 @@
                  minlength="4" maxlength="50" pattern="^[_.@A-Za-z0-9-]*$" required>
           <div *ngIf="login.dirty && login.invalid">
             <small class="form-text text-danger" *ngIf="login.errors.required">
-              Your username is required.
+              Your login is required.
             </small>
             <small class="form-text text-danger" *ngIf="login.errors.minlength">
-              Your username is required to be at least 4 character.
+              Your login is required to be at least 4 character.
             </small>
             <small class="form-text text-danger" *ngIf="login.errors.maxlength">
-              Your username cannot be longer than 50 characters.
+              Your login cannot be longer than 50 characters.
             </small>
             <small class="form-text text-danger" *ngIf="login.errors.pattern">
-              Your username can only contain letters and digits.
+              Your login can only contain letters and digits.
             </small>
           </div>
         </div>
@@ -59,16 +59,16 @@
                  minlength="4" maxlength="254" pattern="^[_.@A-Za-z0-9-]*$" required>
           <div *ngIf="name.dirty && name.invalid">
             <small class="form-text text-danger" *ngIf="name.errors.required">
-              Your username is required.
+              Your name is required.
             </small>
             <small class="form-text text-danger" *ngIf="name.errors.minlength">
-              Your username is required to be at least 4 character.
+              Your name is required to be at least 4 character.
             </small>
             <small class="form-text text-danger" *ngIf="name.errors.maxlength">
-              Your username cannot be longer than 50 characters.
+              Your name cannot be longer than 50 characters.
             </small>
             <small class="form-text text-danger" *ngIf="name.errors.pattern">
-              Your username can only contain letters and digits.
+              Your name can only contain letters and digits.
             </small>
           </div>
         </div>
@@ -79,16 +79,16 @@
                  minlength="4" maxlength="254" pattern="^[_.@A-Za-z0-9-]*$" required>
           <div *ngIf="lastName.dirty && lastName.invalid">
             <small class="form-text text-danger" *ngIf="lastName.errors.required">
-              Your username is required.
+              Your last name is required.
             </small>
             <small class="form-text text-danger" *ngIf="lastName.errors.minlength">
-              Your username is required to be at least 4 character.
+              Your last name is required to be at least 4 character.
             </small>
             <small class="form-text text-danger" *ngIf="lastName.errors.maxlength">
-              Your username cannot be longer than 50 characters.
+              Your last name cannot be longer than 50 characters.
             </small>
             <small class="form-text text-danger" *ngIf="lastName.errors.pattern">
-              Your username can only contain letters and digits.
+              Your last name can only contain letters and digits.
             </small>
           </div>
         </div>

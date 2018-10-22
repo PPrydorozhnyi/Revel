@@ -63,12 +63,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.6.0</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
 		<dependency>
 			<groupId>javax.json</groupId>
@@ -98,7 +92,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.18</version>
+			<version>1.18.2</version>
 			<scope>provided</scope>
 		</dependency>
 
