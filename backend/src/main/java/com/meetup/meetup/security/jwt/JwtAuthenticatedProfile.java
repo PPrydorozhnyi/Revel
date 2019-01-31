@@ -2,7 +2,6 @@ package com.meetup.meetup.security.jwt;
 
 import com.meetup.meetup.config.SecurityConfig;
 import com.meetup.meetup.entity.User;
-import jdk.nashorn.internal.parser.Token;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

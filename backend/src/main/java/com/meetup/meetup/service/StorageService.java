@@ -1,10 +1,6 @@
 package com.meetup.meetup.service;
 
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import com.meetup.meetup.dao.UserDao;
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.exception.runtime.frontend.detailed.FileUploadException;
@@ -15,6 +11,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static com.meetup.meetup.keys.Key.EXCEPTION_FILE_UPLOAD;
 
 
@@ -23,26 +23,31 @@ import static com.meetup.meetup.keys.Key.EXCEPTION_FILE_UPLOAD;
 @PropertySource("classpath:strings.properties")
 public class StorageService {
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
-    @Autowired
-    private AuthenticationFacade authenticationFacade;
+    private final AuthenticationFacade authenticationFacade;
 
-    @Autowired
-    private UserDao userDao;
+    private final UserDao userDao;
 
     private Path rootLocation ;
+
+    @Autowired
+    public StorageService(Environment env, AuthenticationFacade authenticationFacade, UserDao userDao) {
+        this.env = env;
+        this.authenticationFacade = authenticationFacade;
+        this.userDao = userDao;
+    }
 
     public User store(MultipartFile file) {
         rootLocation = Paths.get(env.getProperty("profile.img.link"));
         User user = authenticationFacade.getAuthentication();
         String inFileFormat = "." + file.getOriginalFilename().split("\\.")[1];
         user.setImgPath(env.getProperty("remote.img.link") + user.getId() + inFileFormat);
+        //user.setImgPath(rootLocation.resolve(user.getId() + inFileFormat).toAbsolutePath().toString());
         userDao.update(user);
         try {
-            Files.deleteIfExists(this.rootLocation.resolve(user.getId() + inFileFormat));
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(user.getId() + inFileFormat));
+            Files.deleteIfExists(rootLocation.resolve(user.getId() + inFileFormat));
+            Files.copy(file.getInputStream(), rootLocation.resolve(user.getId() + inFileFormat));
             return user;
         } catch (Exception e) {
             throw new FileUploadException(String.format(env.getProperty(EXCEPTION_FILE_UPLOAD), file.getOriginalFilename()));
