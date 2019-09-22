@@ -18,8 +18,12 @@ public class WishListController {
 
     private static Logger log = LoggerFactory.getLogger(WishListController.class);
 
+    private final WishListService wishListService;
+
     @Autowired
-    private WishListService wishListService;
+    public WishListController(WishListService wishListService) {
+        this.wishListService = wishListService;
+    }
 
     @GetMapping
     @PreAuthorize("@wishListAuthorization.isUserCorrect(#userId)")

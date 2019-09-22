@@ -19,8 +19,12 @@ public class FolderController {
 
     private static Logger log = LoggerFactory.getLogger(FolderController.class);
 
+    private final FolderService folderService;
+
     @Autowired
-    private FolderService folderService;
+    public FolderController(FolderService folderService) {
+        this.folderService = folderService;
+    }
 
     @GetMapping
     @PreAuthorize("@folderAuthorization.isUserCorrect(#userId)")

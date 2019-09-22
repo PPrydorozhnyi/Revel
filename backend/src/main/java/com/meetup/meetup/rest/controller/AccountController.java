@@ -21,8 +21,12 @@ public class AccountController {
 
     private static Logger log = LoggerFactory.getLogger(AccountController.class);
 
+    private final AccountService accountService;
+
     @Autowired
-    private AccountService accountService;
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @PostMapping("/auth/login")
     public ResponseEntity<UserAndTokenVM> login(@Valid @RequestBody LoginVM loginModel) {

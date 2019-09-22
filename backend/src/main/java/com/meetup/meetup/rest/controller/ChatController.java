@@ -21,8 +21,12 @@ public class ChatController {
 
     private static Logger log = LoggerFactory.getLogger(ChatController.class);
 
+    private final ChatService chatService;
+
     @Autowired
-    private ChatService chatService;
+    public ChatController(ChatService chatService) {
+        this.chatService = chatService;
+    }
 
     @PostMapping
     @PreAuthorize("@chatAuthorization.isUserOwnerOfEvent(#userId, #eventId)")
