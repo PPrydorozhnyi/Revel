@@ -22,11 +22,15 @@ public class EventController {
 
     private static Logger log = LoggerFactory.getLogger(EventController.class);
 
-    @Autowired
-    private EventService eventService;
+    private final EventService eventService;
+
+    private final EventImageService eventImageService;
 
     @Autowired
-    private EventImageService eventImageService;
+    public EventController(EventService eventService, EventImageService eventImageService) {
+        this.eventService = eventService;
+        this.eventImageService = eventImageService;
+    }
 
     @GetMapping
     @PreAuthorize("@eventAuthorization.isUserCorrect(#userId)")
