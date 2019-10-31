@@ -3,15 +3,15 @@ CREATE TABLE rv_user (
   login VARCHAR(50) NOT NULL UNIQUE,
   password VARCHAR(50) NULL,
   name VARCHAR(254) NOT NULL,
-  surname VARCHAR(254) NOT NULL,
+  last_name VARCHAR(254) NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
   timezone INTEGER,
   image_filepath VARCHAR(200),
-  bday TIMESTAMP ,
+  birthday TIMESTAMP ,
   phone VARCHAR(25),
   pined_event_id INTEGER,
   periodical_email VARCHAR(100),
-  REGISTER_DATE TIMESTAMP
+  register_date TIMESTAMP
 );
 
 CREATE TABLE rv_user_item (

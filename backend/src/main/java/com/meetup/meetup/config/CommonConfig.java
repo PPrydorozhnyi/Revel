@@ -5,9 +5,11 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Slf4j
 @Configuration
+@EnableScheduling
 public class CommonConfig {
     @Bean
     ModelMapper modelMapper() {
