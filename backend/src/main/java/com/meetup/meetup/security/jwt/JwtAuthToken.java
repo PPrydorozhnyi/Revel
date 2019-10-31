@@ -9,7 +9,7 @@ import java.util.Collection;
 public class JwtAuthToken extends UsernamePasswordAuthenticationToken {
     private final String token;
 
-    public JwtAuthToken(String token) {
+    JwtAuthToken(String token) {
         super(null, null);
         this.token = token;
     }

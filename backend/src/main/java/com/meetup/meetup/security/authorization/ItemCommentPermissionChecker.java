@@ -4,21 +4,21 @@ import com.meetup.meetup.dao.ItemCommentDao;
 import com.meetup.meetup.entity.ItemComment;
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.security.AuthenticationFacade;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component(value = "itemCommentPermissionChecker")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ItemCommentPermissionChecker {
 
     private static Logger log = LoggerFactory.getLogger(ItemCommentPermissionChecker.class);
 
-    @Autowired
-    private ItemCommentDao itemCommentDao;
+    private final ItemCommentDao itemCommentDao;
 
-    @Autowired
-    private AuthenticationFacade authenticationFacade;
+    private final AuthenticationFacade authenticationFacade;
 
     public boolean canDeleteItemComment(int commentId) {
 

@@ -14,7 +14,6 @@ public final class Key {
     public static final String TABLE_TAG = "TAG";
     public static final String TABLE_LLIKE = "LLIKE";
     public static final String TABLE_CHAT = "CHAT";
-    public static final String TABLE_CHAT_TYPE = "CHAT_TYPE";
     public static final String TABLE_MESSAGE = "MESSAGE";
     public static final String TABLE_ITEM_COMMENT = "ITEM_COMMENT";
 

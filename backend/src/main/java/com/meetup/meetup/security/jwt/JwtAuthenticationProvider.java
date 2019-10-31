@@ -3,6 +3,7 @@ package com.meetup.meetup.security.jwt;
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.exception.runtime.AuthenticationException;
 import com.meetup.meetup.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,14 @@ import static com.meetup.meetup.keys.Key.EXCEPTION_JWT_IS_NOT_CORRECT;
 
 @Component
 @PropertySource("classpath:strings.properties")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     private static Logger log = LoggerFactory.getLogger(JwtAuthenticationProvider.class);
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
     @Override
     public Authentication authenticate(Authentication authentication) {

@@ -33,14 +33,15 @@ import static com.meetup.meetup.keys.Key.*;
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
 
-    @Autowired
-    private FolderDaoImpl folderDao;
+    private final FolderDaoImpl folderDao;
+
+    private final UserRowMapper userRowMapper;
 
     @Autowired
-    private UserRowMapper userRowMapper;
-
-    public UserDaoImpl() {
+    public UserDaoImpl(FolderDaoImpl folderDao, UserRowMapper userRowMapper) {
         log = LoggerFactory.getLogger(UserDaoImpl.class);
+        this.folderDao = folderDao;
+        this.userRowMapper = userRowMapper;
     }
 
     /**
@@ -62,7 +63,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     /**
      * Checks if login exists in the database
      *
-     * @param email
+     * @param email user email
      * @return true if login is free
      */
     @Override

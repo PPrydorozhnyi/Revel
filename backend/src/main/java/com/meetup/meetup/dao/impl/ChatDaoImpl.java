@@ -8,6 +8,7 @@ import com.meetup.meetup.exception.runtime.DatabaseWorkException;
 import com.meetup.meetup.exception.runtime.EntityNotFoundException;
 import com.meetup.meetup.service.vm.ChatCheckEntity;
 import com.meetup.meetup.service.vm.ChatIdsVM;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,12 @@ import java.util.Map;
 import static com.meetup.meetup.keys.Key.*;
 
 @Repository
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ChatDaoImpl implements ChatDao {
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     private static Logger log = LoggerFactory.getLogger(ChatDaoImpl.class);
     private static final int CHAT_ID_WITH_OWNER = 1;
@@ -166,10 +166,10 @@ public class ChatDaoImpl implements ChatDao {
 
         try {
             List<Integer> chatIds = jdbcTemplate.query(env.getProperty(CHAT_FIND_CHAT_ID_BY_EVENT_ID_AND_CHAT_TYPE_ID),
-                    new Object[]{eventId, chatTypeId}, (rs,rowNum)->rs.getInt(1));
-            if(chatIds.isEmpty()){
+                    new Object[]{eventId, chatTypeId}, (rs, rowNum) -> rs.getInt(1));
+            if (chatIds.isEmpty()) {
                 throw new EntityNotFoundException(String.format(env.getProperty(EXCEPTION_ENTITY_NOT_FOUND), "Chat", "eventId", eventId));
-            } else{
+            } else {
                 chatId = chatIds.get(0);
             }
         } catch (DataAccessException e) {
@@ -214,7 +214,7 @@ public class ChatDaoImpl implements ChatDao {
                     (resultSet, i) -> {
                         checkEntity.setChatTypeId(resultSet.getInt(CHAT_TYPE_ID));
                         role[0] = resultSet.getString(ROLE_NAME);
-                        checkEntity.setRole( role[0] == null ? Role.NULL : Role.valueOf(role[0]));
+                        checkEntity.setRole(role[0] == null ? Role.NULL : Role.valueOf(role[0]));
                         return checkEntity;
                     });
         } catch (DataAccessException e) {

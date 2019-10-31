@@ -13,7 +13,7 @@ public class JwtAuthenticatedProfile implements Authentication {
     private final User user;
     private final String token;
 
-    public JwtAuthenticatedProfile(User user, String token) {
+    JwtAuthenticatedProfile(User user, String token) {
         this.user = user;
         this.token = token;
     }

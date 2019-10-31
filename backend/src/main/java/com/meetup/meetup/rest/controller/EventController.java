@@ -41,7 +41,7 @@ public class EventController {
     }
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<Event> getEvent(@PathVariable int userId, @PathVariable int eventId) {
+    public ResponseEntity<Event> getEvent(@PathVariable int eventId) {
         log.debug("Trying to get event by id '{}'", eventId);
 
         Event event = eventService.getEvent(eventId);

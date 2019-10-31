@@ -1,34 +1,24 @@
 package com.meetup.meetup.service.mail;
 
-import com.meetup.meetup.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 
 public class MailBuilder {
-
-    private static Logger log = LoggerFactory.getLogger(MailBuilder.class);
 
     private TemplateEngine templateEngine;
 
     private Context context;
     private String content;
     private String to;
-    private String subject = "Meetup";
+    private String subject = "Revel";
     private String fileName = null;
     private MultipartFile multipartFile;
     private File file;

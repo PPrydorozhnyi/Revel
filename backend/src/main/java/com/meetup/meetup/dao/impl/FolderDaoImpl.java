@@ -15,7 +15,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,7 @@ public class FolderDaoImpl extends AbstractDao<Folder> implements FolderDao {
     @Override
     public List<Folder> getUserFolders(int id) {
         log.debug("Try to get folders for user with id '{}'", id);
-        List<Folder> userFolders = new ArrayList<>();
+        List<Folder> userFolders;
 
         try {
             userFolders = jdbcTemplate.query(env.getProperty(FOLDER_GET_USER_FOLDERS),

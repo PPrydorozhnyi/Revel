@@ -8,7 +8,7 @@ public enum EventType {
 
     private final int value;
 
-    private EventType(int value) {
+    EventType(int value) {
         this.value = value;
     }
 

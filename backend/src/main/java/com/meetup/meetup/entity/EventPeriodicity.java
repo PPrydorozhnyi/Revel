@@ -11,7 +11,7 @@ public enum EventPeriodicity {
 
     private final int value;
 
-    private EventPeriodicity(int value) {
+    EventPeriodicity(int value) {
         this.value = value;
     }
 

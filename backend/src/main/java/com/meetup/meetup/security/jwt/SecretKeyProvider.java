@@ -1,6 +1,7 @@
 package com.meetup.meetup.security.jwt;
 
 import com.meetup.meetup.exception.runtime.SecretKeyNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,13 @@ import java.nio.file.Paths;
 import static com.meetup.meetup.keys.Key.EXCEPTION_KEY_NOT_FOUND;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @PropertySource("classpath:strings.properties")
 public class SecretKeyProvider {
 
     private static Logger log = LoggerFactory.getLogger(SecretKeyProvider.class);
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
     public byte[] getKey() {
         log.debug("Trying to get secret key");
