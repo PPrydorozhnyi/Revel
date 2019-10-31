@@ -1,7 +1,6 @@
 package com.meetup.meetup.rest.controller;
 
 import com.meetup.meetup.entity.User;
-import com.meetup.meetup.service.EventService;
 import com.meetup.meetup.service.ProfileService;
 import com.meetup.meetup.service.StorageService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,6 @@ public class ProfileController {
 
     private final ProfileService profileService;
     private final StorageService storageService;
-    private final EventService eventService;
 
     @GetMapping("/{login}")
     public ResponseEntity<User> getUserByLogin(@PathVariable String login) {

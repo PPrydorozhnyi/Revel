@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import static com.meetup.meetup.keys.Key.*;
 
 public class EventRowMapper implements RowMapper<Event> {
+
     @Override
     public Event mapRow(ResultSet resultSet, int i) throws SQLException {
         Event event = new Event();

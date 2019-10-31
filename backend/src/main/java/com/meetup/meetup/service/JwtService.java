@@ -12,8 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -53,7 +53,7 @@ public class JwtService {
         return userDao.findByLogin(login);
     }
 
-    public User verifyForRecoveryPassword(String token) {
+    User verifyForRecoveryPassword(String token) {
         log.debug("Trying to get secret key form SecretKeyProvider");
 
         byte[] secretKey = secretKeyProvider.getKey();
@@ -68,7 +68,7 @@ public class JwtService {
         return userDao.findByEmail(email);
     }
 
-    public String tokenFor(User user) {
+    String tokenFor(User user) {
         log.debug("Trying to get secret key form SecretKeyProvider");
 
         byte[] secretKey = secretKeyProvider.getKey();
@@ -85,7 +85,7 @@ public class JwtService {
                 .compact();
     }
 
-    public String tokenForConfirmationRegistration(User user) {
+    String tokenForConfirmationRegistration(User user) {
         log.debug("Trying to get secret key form SecretKeyProvider");
 
         byte[] secretKey = secretKeyProvider.getKey();
@@ -102,7 +102,7 @@ public class JwtService {
                 .compact();
     }
 
-    public String tokenForRecoveryPassword(User user) {
+    String tokenForRecoveryPassword(User user) {
         log.debug("Trying to get secret key form SecretKeyProvider");
 
         byte[] secretKey = secretKeyProvider.getKey();

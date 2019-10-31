@@ -2,6 +2,7 @@ package com.meetup.meetup.security;
 
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.exception.runtime.AuthenticationException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,12 @@ import static com.meetup.meetup.keys.Key.EXCEPTION_AUTHENTICATION;
  * Used for get authenticated {@link User}.
  */
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @PropertySource("classpath:strings.properties")
 public class AuthenticationFacade {
 
-    @Autowired
-    private Environment env;
-
     private static Logger log = LoggerFactory.getLogger(AuthenticationFacade.class);
+    private final Environment env;
 
     public User getAuthentication() {
         log.debug("Trying to get authentication from SecurityContextHolder");

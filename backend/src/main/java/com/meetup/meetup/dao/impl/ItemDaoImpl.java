@@ -39,7 +39,7 @@ public class ItemDaoImpl extends AbstractDao<Item> implements ItemDao {
     public List<Item> getWishListByUserId(int userId) {
         log.debug("Try get wish list by user id: '{}'", userId);
 
-        List<Item> items = new ArrayList<>();
+        List<Item> items;
         try {
             items = jdbcTemplate.query(
                     env.getProperty(ITEM_GET_ITEMS_BY_USER_ID), new Object[]{userId}, new ItemFullInfoRowMapper());
@@ -369,12 +369,6 @@ public class ItemDaoImpl extends AbstractDao<Item> implements ItemDao {
             log.error("Query fails by searching tags name by about tag: '{}'", aboutTag, e);
             throw new DatabaseWorkException(env.getProperty(EXCEPTION_DATABASE_WORK));
         }
-    }
-
-    @Override
-    public boolean itemExistInWishList(Item item) {
-        log.debug("Check whether an item exists '{}'", item);
-        return getWishListByUserId(item.getOwnerId()).contains(item);
     }
 
     private void addTags(List<String> tags, int itemId) {

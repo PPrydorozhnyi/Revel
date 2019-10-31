@@ -1,6 +1,5 @@
 package com.meetup.meetup.security.jwt;
 
-import com.meetup.meetup.security.AuthenticationFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -16,7 +15,7 @@ public class JwtSuccessHandler implements AuthenticationSuccessHandler {
     private static Logger log = LoggerFactory.getLogger(JwtSuccessHandler.class);
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) {
         log.debug("Successfully authentication");
     }
 }
