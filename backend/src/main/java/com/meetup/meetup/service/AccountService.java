@@ -12,6 +12,7 @@ import com.meetup.meetup.security.utils.HashMD5;
 import com.meetup.meetup.service.vm.LoginVM;
 import com.meetup.meetup.service.vm.RecoveryPasswordVM;
 import com.meetup.meetup.service.vm.UserAndTokenVM;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import java.sql.Timestamp;
 import static com.meetup.meetup.keys.Key.*;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @PropertySource("classpath:strings.properties")
 public class AccountService {
 
@@ -35,18 +37,7 @@ public class AccountService {
     private final UserDao userDao;
     private final MailService mailService;
     private final AuthenticationFacade authenticationFacade;
-
-    @Autowired
-    private Environment env;
-
-    @Autowired
-    public AccountService(JwtService jwtService, UserDao userDao, MailService mailService, AuthenticationFacade authenticationFacade) {
-        log.info("Initializing AccountService");
-        this.jwtService = jwtService;
-        this.userDao = userDao;
-        this.mailService = mailService;
-        this.authenticationFacade = authenticationFacade;
-    }
+    private final Environment env;
 
     public UserAndTokenVM login(LoginVM credentials) {
         log.debug("Trying to get hash from password");

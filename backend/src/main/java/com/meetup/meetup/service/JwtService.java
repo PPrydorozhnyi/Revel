@@ -7,6 +7,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import static java.time.ZoneOffset.UTC;
 @PropertySource("classpath:image.properties")
 @PropertySource("classpath:jwt.properties")
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class JwtService {
 
     private static Logger log = LoggerFactory.getLogger(JwtService.class);
@@ -32,17 +34,9 @@ public class JwtService {
     private final static String JWT_LOGIN = "jwt.login";
     private final static String JWT_EMAIL = "jwt.email";
 
-    @Autowired
-    private Environment env;
-
+    private final Environment env;
     private final SecretKeyProvider secretKeyProvider;
     private final UserDao userDao;
-
-    @Autowired
-    public JwtService(SecretKeyProvider secretKeyProvider, UserDao userDao) {
-        this.secretKeyProvider = secretKeyProvider;
-        this.userDao = userDao;
-    }
 
     public User verify(String token) {
         log.debug("Trying to get secret key form SecretKeyProvider");

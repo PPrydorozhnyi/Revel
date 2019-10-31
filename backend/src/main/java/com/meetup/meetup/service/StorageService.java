@@ -5,6 +5,7 @@ import com.meetup.meetup.dao.UserDao;
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.exception.runtime.frontend.detailed.FileUploadException;
 import com.meetup.meetup.security.AuthenticationFacade;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -21,6 +22,7 @@ import static com.meetup.meetup.keys.Key.EXCEPTION_FILE_UPLOAD;
 @Service
 @PropertySource("classpath:links.properties")
 @PropertySource("classpath:strings.properties")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StorageService {
 
     private final Environment env;
@@ -29,14 +31,7 @@ public class StorageService {
 
     private final UserDao userDao;
 
-    private Path rootLocation ;
-
-    @Autowired
-    public StorageService(Environment env, AuthenticationFacade authenticationFacade, UserDao userDao) {
-        this.env = env;
-        this.authenticationFacade = authenticationFacade;
-        this.userDao = userDao;
-    }
+    private Path rootLocation;
 
     public User store(MultipartFile file) {
         rootLocation = Paths.get(env.getProperty("profile.img.link"));

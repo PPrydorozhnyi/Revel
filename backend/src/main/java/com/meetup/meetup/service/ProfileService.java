@@ -4,6 +4,7 @@ import com.meetup.meetup.dao.UserDao;
 import com.meetup.meetup.entity.Event;
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.exception.runtime.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.List;
 import static com.meetup.meetup.keys.Key.EXCEPTION_ENTITY_NOT_FOUND;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @PropertySource("classpath:strings.properties")
 public class ProfileService {
 
@@ -23,15 +25,7 @@ public class ProfileService {
 
     private final UserDao userDao;
     private final EventService eventService;
-
-    @Autowired
-    public ProfileService(UserDao userDao, EventService eventService) {
-        this.userDao = userDao;
-        this.eventService = eventService;
-    }
-
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
 
     public User getUserByLogin(String login) {

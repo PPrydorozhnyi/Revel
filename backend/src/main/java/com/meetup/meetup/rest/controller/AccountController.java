@@ -5,6 +5,7 @@ import com.meetup.meetup.service.AccountService;
 import com.meetup.meetup.service.vm.LoginVM;
 import com.meetup.meetup.service.vm.RecoveryPasswordVM;
 import com.meetup.meetup.service.vm.UserAndTokenVM;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @PropertySource("classpath:strings.properties")
 public class AccountController {
 
     private static Logger log = LoggerFactory.getLogger(AccountController.class);
 
     private final AccountService accountService;
-
-    @Autowired
-    public AccountController(AccountService accountService) {
-        this.accountService = accountService;
-    }
 
     @PostMapping("/auth/login")
     public ResponseEntity<UserAndTokenVM> login(@Valid @RequestBody LoginVM loginModel) {

@@ -3,6 +3,7 @@ package com.meetup.meetup.rest.controller;
 import com.meetup.meetup.entity.Message;
 import com.meetup.meetup.service.ChatService;
 import com.meetup.meetup.service.vm.ChatIdsVM;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/api/users/{userId}/chats")
 @PropertySource("classpath:strings.properties")
 public class ChatController {
@@ -22,11 +24,6 @@ public class ChatController {
     private static Logger log = LoggerFactory.getLogger(ChatController.class);
 
     private final ChatService chatService;
-
-    @Autowired
-    public ChatController(ChatService chatService) {
-        this.chatService = chatService;
-    }
 
     @PostMapping
     @PreAuthorize("@chatAuthorization.isUserOwnerOfEvent(#userId, #eventId)")
