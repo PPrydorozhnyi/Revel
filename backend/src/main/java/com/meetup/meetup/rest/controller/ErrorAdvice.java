@@ -2,7 +2,6 @@ package com.meetup.meetup.rest.controller;
 
 import com.meetup.meetup.exception.runtime.CustomRuntimeException;
 import com.meetup.meetup.exception.runtime.frontend.detailed.FrontendDetailedException;
-import com.meetup.meetup.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @ControllerAdvice
-public class ErrorController {
+public class ErrorAdvice {
 
-    private static Logger log = LoggerFactory.getLogger(ErrorController.class);
+    private static Logger log = LoggerFactory.getLogger(ErrorAdvice.class);
 
     @ExceptionHandler(FrontendDetailedException.class)
     public void sendExceptionInfoToFront(HttpServletResponse response, Exception e) {
