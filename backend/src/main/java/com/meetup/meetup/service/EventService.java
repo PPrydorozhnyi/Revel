@@ -6,6 +6,7 @@ import com.meetup.meetup.dao.UserDao;
 import com.meetup.meetup.entity.*;
 import com.meetup.meetup.exception.runtime.frontend.detailed.LoginNotFoundException;
 import com.meetup.meetup.security.AuthenticationFacade;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,29 +26,17 @@ import static com.meetup.meetup.keys.Key.EXCEPTION_LOGIN_NOT_FOUND;
 
 @Service
 @PropertySource("classpath:strings.properties")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EventService {
 
     private static Logger log = LoggerFactory.getLogger(EventService.class);
 
-    @Autowired
-    protected Environment env;
-
-    private final PdfCreateService pdfCreateService;
+    protected final Environment env;
     private final ChatDao chatDao;
     private final EventDao eventDao;
     private final UserDao userDao;
     private final AuthenticationFacade authenticationFacade;
     private final MailService mailService;
-
-    @Autowired
-    public EventService(EventDao eventDao, UserDao userDao, MailService mailService, AuthenticationFacade authenticationFacade, PdfCreateService pdfCreateService, ChatDao chatDao) {
-        this.chatDao = chatDao;
-        this.eventDao = eventDao;
-        this.userDao = userDao;
-        this.mailService = mailService;
-        this.authenticationFacade = authenticationFacade;
-        this.pdfCreateService = pdfCreateService;
-    }
 
     public Event getEvent(int eventId) {
         log.debug("Trying to get event from dao by eventId '{}'", eventId);

@@ -4,6 +4,7 @@ import com.meetup.meetup.dao.ChatDao;
 import com.meetup.meetup.entity.Message;
 import com.meetup.meetup.exception.runtime.DeleteException;
 import com.meetup.meetup.service.vm.ChatIdsVM;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,12 @@ import static com.meetup.meetup.keys.Key.EXCEPTION_UPDATE;
 
 @Service
 @PropertySource("classpath:strings.properties")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ChatService {
 
     private static Logger log = LoggerFactory.getLogger(ChatService.class);
 
-    @Autowired
-    private Environment env;
-
-    @Autowired
-    private ChatDao chatDao;
+    private final ChatDao chatDao;
 
     private Map<Integer, List<String>> userLogins = new HashMap<>();
 

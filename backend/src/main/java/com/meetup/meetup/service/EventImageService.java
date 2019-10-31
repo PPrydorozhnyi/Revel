@@ -1,6 +1,7 @@
 package com.meetup.meetup.service;
 
 import com.meetup.meetup.exception.runtime.frontend.detailed.FileUploadException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -16,10 +17,10 @@ import static com.meetup.meetup.keys.Key.EXCEPTION_FILE_UPLOAD;
 @Service
 @PropertySource("classpath:links.properties")
 @PropertySource("classpath:strings.properties")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EventImageService {
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
     public String store(MultipartFile file) {
 

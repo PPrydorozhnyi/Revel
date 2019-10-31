@@ -4,6 +4,7 @@ import com.meetup.meetup.dao.ItemCommentDao;
 import com.meetup.meetup.entity.ItemComment;
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.security.AuthenticationFacade;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @PropertySource("classpath:strings.properties")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ItemCommentService {
 
     private static Logger log = LoggerFactory.getLogger(ItemCommentService.class);
@@ -23,12 +25,6 @@ public class ItemCommentService {
     private final ItemCommentDao itemCommentDao;
 
     private final AuthenticationFacade authenticationFacade;
-
-    @Autowired
-    public ItemCommentService(ItemCommentDao itemCommentDao, AuthenticationFacade authenticationFacade, Environment env) {
-        this.itemCommentDao = itemCommentDao;
-        this.authenticationFacade = authenticationFacade;
-    }
 
     public ItemComment findById(int id) {
 

@@ -4,6 +4,7 @@ import com.meetup.meetup.dao.EventDao;
 import com.meetup.meetup.dao.FolderDao;
 import com.meetup.meetup.entity.Event;
 import com.meetup.meetup.entity.Folder;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +13,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class FolderService {
 
     private static Logger log = LoggerFactory.getLogger(FolderService.class);
 
     private final FolderDao folderDao;
     private final EventDao eventDao;
-
-    @Autowired
-    public FolderService(FolderDao folderDao, EventDao eventDao) {
-        log.info("Initializing FolderService");
-        this.folderDao = folderDao;
-        this.eventDao = eventDao;
-    }
 
     public List<Folder> getUserFolders(int userId) {
         log.debug("Trying to get all folders for user with id '{}'", userId);
