@@ -2,6 +2,7 @@ package com.meetup.meetup.rest.controller;
 
 import com.meetup.meetup.entity.Item;
 import com.meetup.meetup.service.WishListService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/api/users/{userId}/wishes")
 public class WishListController {
 
     private static Logger log = LoggerFactory.getLogger(WishListController.class);
 
     private final WishListService wishListService;
-
-    @Autowired
-    public WishListController(WishListService wishListService) {
-        this.wishListService = wishListService;
-    }
 
     @GetMapping
     @PreAuthorize("@wishListAuthorization.isUserCorrect(#userId)")
