@@ -1,4 +1,4 @@
-# MEETUP project
+# Revel project
 
 ## ER-diagram
 
