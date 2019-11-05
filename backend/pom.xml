@@ -131,7 +131,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.meetup</groupId>
+			<groupId>com.revel</groupId>
 			<artifactId>frontend</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
