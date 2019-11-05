@@ -1,0 +1,72 @@
+package com.meetup.revel.service;
+
+import com.meetup.revel.dao.ItemCommentDao;
+import com.meetup.revel.entity.ItemComment;
+import com.meetup.revel.entity.User;
+import com.meetup.revel.security.AuthenticationFacade;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
+import java.util.List;
+
+@Service
+@PropertySource("classpath:strings.properties")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class ItemCommentService {
+
+    private static Logger log = LoggerFactory.getLogger(ItemCommentService.class);
+
+    private final ItemCommentDao itemCommentDao;
+
+    private final AuthenticationFacade authenticationFacade;
+
+    public ItemComment findById(int id) {
+
+        log.debug("Trying to get comment with id '{}'", id);
+
+        return itemCommentDao.findById(id);
+
+    }
+
+    public ItemComment insert(String bodyText, int itemId) {
+        log.debug("Trying to get authenticated user");
+        User user = authenticationFacade.getAuthentication();
+        log.debug("User was successfully received");
+
+        ItemComment itemComment = new ItemComment();
+        itemComment.setPostTime(new Timestamp(System.currentTimeMillis()));
+        itemComment.setAuthorId(user.getId());
+        itemComment.setLogin(user.getLogin());
+        itemComment.setImageFilepath(user.getImgPath());
+        itemComment.setBodyText(bodyText);
+        itemComment.setItemId(itemId);
+
+        log.debug("Trying to insert comment '{}'", itemComment);
+
+        return itemCommentDao.insert(itemComment);
+    }
+
+    public List<ItemComment> getCommentsByItemId(int itemId) {
+
+        log.debug("Trying to get comments for item with id '{}'", itemId);
+
+        return itemCommentDao.getCommentsForItemId(itemId);
+
+    }
+
+
+
+    public ItemComment deleteById(int commentId) {
+
+        ItemComment deleteItem = findById(commentId);
+        log.debug("Trying to delete comment with id '{}'", commentId);
+
+        return itemCommentDao.delete(deleteItem);
+
+    }
+}
