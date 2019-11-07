@@ -3,6 +3,7 @@ package com.meetup.revel.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -52,12 +54,15 @@ public class User {
     @Column(name = "image_filepath")
     private String imgPath;
 
-    private int pinedEventId;
-
     private String periodicalEmail;
 
-//    private String pinedEventName;
-//    private String pinedEventDate;
-
     private Date registerDate;
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "pinned_event_id")
+    @EqualsAndHashCode.Exclude
+    private Event pinnedEvent;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserEvent> userEvents;
 }

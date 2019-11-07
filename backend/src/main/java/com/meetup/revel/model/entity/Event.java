@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -52,10 +52,12 @@ public class Event {
     private int folderId;
     private String imageFilepath;
 
+    //TODO remove this logic. load owner by separate rest call
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "user_id")
 //    private User owner;
 //    private int ownerId;
-//
-//    private List<User> participants;
+
+    @OneToMany(mappedBy = "event")
+    private Set<UserEvent> participants;
 }
