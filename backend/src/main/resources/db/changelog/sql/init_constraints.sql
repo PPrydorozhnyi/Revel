@@ -5,7 +5,6 @@ ALTER TABLE rv_user_item ADD CONSTRAINT u_item_fk_booker FOREIGN KEY(id_who_book
 
 ALTER TABLE rv_user_item ADD CONSTRAINT u_item_fk_user FOREIGN KEY(user_id) REFERENCES rv_user(user_id);
 ALTER TABLE rv_user_item ADD CONSTRAINT u_item_fk_item FOREIGN KEY(item_id) REFERENCES rv_item(item_id);
-ALTER TABLE rv_user_item ADD CONSTRAINT u_item_fk_prior FOREIGN KEY(priority_id) REFERENCES rv_priority;
 
 ALTER TABLE rv_like ADD CONSTRAINT like_fk_item FOREIGN KEY(item_id) REFERENCES rv_item(item_id) ON DELETE CASCADE;
 ALTER TABLE rv_like ADD CONSTRAINT like_fk_user FOREIGN KEY(user_id) REFERENCES rv_user(user_id);
@@ -15,18 +14,14 @@ ALTER TABLE rv_friend ADD CONSTRAINT friend_fk_user_r FOREIGN KEY(receiver_id) R
 
 ALTER TABLE rv_user_event ADD CONSTRAINT u_event_fk_user FOREIGN KEY(user_id) REFERENCES rv_user(user_id);
 ALTER TABLE rv_user_event ADD CONSTRAINT u_event_fk_event FOREIGN KEY(event_id) REFERENCES rv_event(event_id);
-ALTER TABLE rv_user_event ADD CONSTRAINT u_event_fk_role FOREIGN KEY(role_id) REFERENCES rv_role(role_id);
 
 ALTER TABLE rv_folder ADD CONSTRAINT folder_fk_user FOREIGN KEY(user_id) REFERENCES rv_user(user_id);
 
-ALTER TABLE rv_event ADD CONSTRAINT event_fk_period FOREIGN KEY(periodicity_id) REFERENCES rv_periodicity(periodicity_id);
-ALTER TABLE rv_event ADD CONSTRAINT event_fk_e_type FOREIGN KEY(event_type_id) REFERENCES rv_event_type(event_type_id);
 ALTER TABLE rv_event ADD CONSTRAINT event_fk_folder FOREIGN KEY(folder_id) REFERENCES rv_folder(folder_id);
 
 ALTER TABLE rv_message ADD CONSTRAINT message_fk_user FOREIGN KEY(chat_id) REFERENCES rv_chat(chat_id);
 ALTER TABLE rv_message ADD CONSTRAINT message_fk_chat FOREIGN KEY(sender_id) REFERENCES rv_user(user_id);
 
-ALTER TABLE rv_chat ADD CONSTRAINT chat_fk_c_type FOREIGN KEY(chat_type_id) REFERENCES rv_chat_type(chat_type_id);
 ALTER TABLE rv_chat ADD CONSTRAINT chat_fk_event FOREIGN KEY(event_id) REFERENCES rv_event(event_id);
 
 ALTER TABLE rv_tag_item ADD CONSTRAINT tag_item_fk_tag FOREIGN KEY (tag_id) REFERENCES rv_tag(tag_id);

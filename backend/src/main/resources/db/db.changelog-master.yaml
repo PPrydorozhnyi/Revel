@@ -1,7 +1,7 @@
 databaseChangeLog:
   - property:
       name: db.version
-      value: 2
+      value: 3
   - include:
       file: changelog/clear_schema.yml
       relativeToChangelogFile: true
@@ -10,9 +10,6 @@ databaseChangeLog:
       relativeToChangelogFile: true
   - include:
       file: changelog/init_constraints.yml
-      relativeToChangelogFile: true
-  - include:
-      file: changelog/init_data.yml
       relativeToChangelogFile: true
   - include:
       file: changelog/init_indexes.yml

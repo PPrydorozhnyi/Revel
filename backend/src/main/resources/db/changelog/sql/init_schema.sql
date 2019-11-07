@@ -1,3 +1,24 @@
+
+CREATE TYPE rv_periodicity as ENUM (
+    'HOUR', 'DAY', 'WEEK', 'MONTH', 'YEAR', 'ONCE'
+);
+
+CREATE TYPE rv_event_type as ENUM (
+    'EVENT', 'NOTE', 'PRIVATE_EVENT'
+);
+
+CREATE TYPE rv_role as ENUM (
+    'OWNER', 'PARTICIPANT'
+);
+
+CREATE TYPE rv_priority as ENUM (
+    'URGENT', 'NORMAL', 'LOW'
+);
+
+CREATE TYPE rv_chat_type as ENUM (
+    'WITH_OWNER', 'WITHOUT_OWNER'
+);
+
 CREATE TABLE rv_user (
   user_id SERIAL PRIMARY KEY,
   login VARCHAR(50) NOT NULL UNIQUE,
@@ -18,14 +39,9 @@ CREATE TABLE rv_user_item (
   user_id INTEGER NOT NULL,
   item_id INTEGER NOT NULL,
   id_who_booked INTEGER,
-  priority_id INTEGER,
+  priority rv_priority,
   due_date TIMESTAMP NOT NULL,
   UNIQUE (user_id, item_id)
-);
-
-CREATE TABLE rv_priority (
-  priority_id SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE rv_like (
@@ -64,13 +80,8 @@ CREATE TABLE rv_friend (
 CREATE TABLE rv_user_event (
   user_id INTEGER NOT NULL,
   event_id INTEGER NOT NULL,
-  role_id INTEGER NOT NULL,
+  role rv_role NOT NULL,
   UNIQUE (user_id, event_id)
-);
-
-CREATE TABLE rv_role (
-  role_id SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE rv_folder (
@@ -84,9 +95,9 @@ CREATE TABLE rv_event (
   name VARCHAR(50) NOT NULL,
   event_date timestamp,
   description VARCHAR(1023),
-  periodicity_id INTEGER,
+  periodicity rv_periodicity,
   place VARCHAR(100),
-  event_type_id INTEGER NOT NULL,
+  event_type rv_event_type NOT NULL,
   is_draft BOOLEAN NOT NULL,
   folder_id INTEGER NOT NULL,
   image_filepath VARCHAR(255) NOT NULL
@@ -100,25 +111,11 @@ CREATE TABLE rv_message (
   chat_id INTEGER NOT NULL
 );
 
-CREATE TABLE rv_periodicity (
-  periodicity_id SERIAL PRIMARY KEY,
-  periodicity_name VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE rv_event_type (
-  event_type_id SERIAL PRIMARY KEY,
-  type varchar(50) NOT NULL
-);
 
 CREATE TABLE rv_chat (
   chat_id SERIAL PRIMARY KEY,
-  chat_type_id INTEGER NOT NULL,
+  chat_type rv_chat_type NOT NULL,
   event_id INTEGER NOT NULL
-);
-
-CREATE TABLE rv_chat_type (
-  chat_type_id SERIAL PRIMARY KEY,
-  type VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE rv_item_comment (
