@@ -12,11 +12,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "rv_user")
 public class User {
 
@@ -47,12 +49,12 @@ public class User {
 
     private String phone;
 
-    private String birthday;
+    private Date birthday;
 
     private Integer timeZone;
 
     @Column(name = "image_filepath")
-    private String imgPath;
+    private String imagePath;
 
     private String periodicalEmail;
 
@@ -64,5 +66,10 @@ public class User {
     private Event pinnedEvent;
 
     @OneToMany(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
     private Set<UserEvent> userEvents;
+
+    @OneToMany(mappedBy = "owner")
+    @EqualsAndHashCode.Exclude
+    private List<Folder> folders;
 }

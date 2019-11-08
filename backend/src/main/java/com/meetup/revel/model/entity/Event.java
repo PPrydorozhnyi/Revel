@@ -6,6 +6,7 @@ import com.meetup.revel.model.enums.EventType;
 import com.meetup.revel.model.type.PostgresEnumType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
 
@@ -19,6 +20,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "rv_event")
 @TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
 public class Event {
@@ -48,8 +50,6 @@ public class Event {
 
     private boolean isDraft;
 
-    @NotNull
-    private int folderId;
     private String imageFilepath;
 
     //TODO remove this logic. load owner by separate rest call
@@ -59,5 +59,12 @@ public class Event {
 //    private int ownerId;
 
     @OneToMany(mappedBy = "event")
+    @EqualsAndHashCode.Exclude
     private Set<UserEvent> participants;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "folder_id")
+    @EqualsAndHashCode.Exclude
+    private Folder folder;
 }

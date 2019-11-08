@@ -26,11 +26,11 @@ CREATE TABLE rv_user (
   name VARCHAR(254) NOT NULL,
   last_name VARCHAR(254) NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
-  timezone INTEGER,
+  time_zone INTEGER,
   image_filepath VARCHAR(200),
   birthday TIMESTAMP ,
   phone VARCHAR(25),
-  pined_event_id INTEGER,
+  pinned_event_id INTEGER,
   periodical_email VARCHAR(100),
   register_date TIMESTAMP
 );
@@ -78,6 +78,7 @@ CREATE TABLE rv_friend (
 );
 
 CREATE TABLE rv_user_event (
+  user_event_id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL,
   event_id INTEGER NOT NULL,
   role rv_role NOT NULL,
