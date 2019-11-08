@@ -76,11 +76,12 @@ CREATE TABLE rv_tag (
   name VARCHAR(20) NOT NULL
 );
 
+--mapped
 CREATE TABLE rv_friend (
-  sender_id INTEGER NOT NULL,
-  receiver_id INTEGER NOT NULL,
-  is_Confirmed BOOLEAN  NOT NULL,
-  UNIQUE (sender_id, receiver_id)
+                           sender_id   INTEGER NOT NULL,
+                           receiver_id INTEGER NOT NULL,
+                           confirmed   BOOLEAN NOT NULL,
+                           UNIQUE (sender_id, receiver_id)
 );
 
 --mapped
