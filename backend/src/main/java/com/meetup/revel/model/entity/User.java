@@ -65,7 +65,7 @@ public class User {
     @EqualsAndHashCode.Exclude
     private Event pinnedEvent;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private Set<UserEvent> userEvents;
 

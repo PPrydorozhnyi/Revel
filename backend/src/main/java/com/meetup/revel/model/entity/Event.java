@@ -58,7 +58,7 @@ public class Event {
 //    private User owner;
 //    private int ownerId;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private Set<UserEvent> participants;
 

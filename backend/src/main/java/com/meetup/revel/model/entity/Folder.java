@@ -31,7 +31,7 @@ public class Folder {
     @EqualsAndHashCode.Exclude
     private User owner;
 
-    @OneToMany(mappedBy = "folder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "folder", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<Event> events;
 }
