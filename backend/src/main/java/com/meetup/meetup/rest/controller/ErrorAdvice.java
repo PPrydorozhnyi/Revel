@@ -18,7 +18,7 @@ public class ErrorAdvice {
     @ExceptionHandler(FrontendDetailedException.class)
     public void sendExceptionInfoToFront(HttpServletResponse response, Exception e) {
         log.error("Exception sent to frontend: ", e);
-        response.setStatus(500);
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         try {
             response.getWriter().print(e.getMessage());
         } catch (IOException e1) {
@@ -39,9 +39,9 @@ public class ErrorAdvice {
     }
 
     private void sendTeapotException(HttpServletResponse response){
-        response.setStatus(418);
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         try {
-            response.getWriter().print("Attention, an attempt to brew coffee with a teapot");
+            response.getWriter().print("Server can not process request");
         } catch (IOException e1) {
             log.error("exception in ErrorController: ", e1);
         }
