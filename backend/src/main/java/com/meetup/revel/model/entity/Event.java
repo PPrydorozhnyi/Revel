@@ -2,7 +2,7 @@ package com.meetup.revel.model.entity;
 
 
 import com.meetup.revel.entity.EventPeriodicity;
-import com.meetup.revel.entity.EventType;
+import com.meetup.revel.model.enums.EventType;
 import com.meetup.revel.model.type.PostgresEnumType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
