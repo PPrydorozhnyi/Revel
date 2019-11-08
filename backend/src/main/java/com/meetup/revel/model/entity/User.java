@@ -72,4 +72,12 @@ public class User {
     @OneToMany(mappedBy = "owner")
     @EqualsAndHashCode.Exclude
     private List<Folder> folders;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<UserItem> ownedItems;
+
+    @OneToMany(mappedBy = "booker", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<UserItem> bookedItems;
 }
