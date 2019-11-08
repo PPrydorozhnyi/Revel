@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -55,7 +56,7 @@ public class Event {
 //    private User owner;
 //    private int ownerId;
 
-    @OneToMany(mappedBy = "event", orphanRemoval = true)
+    @OneToMany(mappedBy = "event", orphanRemoval = true, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     private Set<UserEvent> participants;
 
@@ -64,4 +65,8 @@ public class Event {
     @JoinColumn(name = "folder_id")
     @EqualsAndHashCode.Exclude
     private Folder folder;
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, orphanRemoval = true)
+    @EqualsAndHashCode.Include
+    private List<Chat> chats;
 }
