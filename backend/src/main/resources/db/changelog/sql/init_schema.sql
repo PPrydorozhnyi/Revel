@@ -19,6 +19,7 @@ CREATE TYPE rv_chat_type as ENUM (
     'WITH_OWNER', 'WITHOUT_OWNER'
 );
 
+--mapped
 CREATE TABLE rv_user (
   user_id SERIAL PRIMARY KEY,
   login VARCHAR(50) NOT NULL UNIQUE,
@@ -35,6 +36,7 @@ CREATE TABLE rv_user (
   register_date TIMESTAMP
 );
 
+--mapped
 CREATE TABLE rv_user_item (
   user_id INTEGER NOT NULL,
   item_id INTEGER NOT NULL,
@@ -44,6 +46,7 @@ CREATE TABLE rv_user_item (
   UNIQUE (user_id, item_id)
 );
 
+--mapped
 CREATE TABLE rv_like (
   like_id SERIAL PRIMARY KEY,
   item_id INTEGER NOT NULL,
@@ -51,6 +54,7 @@ CREATE TABLE rv_like (
   UNIQUE (item_id, user_id)
 );
 
+--mapped
 CREATE TABLE rv_item (
   item_id SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
@@ -59,12 +63,14 @@ CREATE TABLE rv_item (
   link VARCHAR(200)
 );
 
+--mapped
 CREATE TABLE rv_tag_item (
   tag_id INTEGER NOT NULL,
   item_id INTEGER NOT NULL,
   UNIQUE (tag_id, item_id)
 );
 
+--mapped
 CREATE TABLE rv_tag (
   tag_id SERIAL PRIMARY KEY,
   name VARCHAR(20) NOT NULL
@@ -77,6 +83,7 @@ CREATE TABLE rv_friend (
   UNIQUE (sender_id, receiver_id)
 );
 
+--mapped
 CREATE TABLE rv_user_event (
   user_id INTEGER NOT NULL,
   event_id INTEGER NOT NULL,
@@ -84,12 +91,14 @@ CREATE TABLE rv_user_event (
   UNIQUE (user_id, event_id)
 );
 
+--mapped
 CREATE TABLE rv_folder (
   folder_id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   user_id INTEGER NOT NULL
 );
 
+--mapped
 CREATE TABLE rv_event (
   event_id SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
