@@ -2,12 +2,10 @@ package com.meetup.revel.model.entity;
 
 
 import com.meetup.revel.model.enums.Role;
-import com.meetup.revel.model.type.PostgresEnumType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,7 +19,6 @@ import java.io.Serializable;
         name = "rv_user_event",
         uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "event_id"})
 )
-@TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
 public class UserEvent implements Serializable {
 
     @Id

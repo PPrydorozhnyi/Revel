@@ -3,12 +3,10 @@ package com.meetup.revel.model.entity;
 
 import com.meetup.revel.entity.EventPeriodicity;
 import com.meetup.revel.model.enums.EventType;
-import com.meetup.revel.model.type.PostgresEnumType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -22,7 +20,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "rv_event")
-@TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
 public class Event {
 
     @Id

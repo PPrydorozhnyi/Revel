@@ -1,11 +1,9 @@
 package com.meetup.revel.model.entity;
 
 import com.meetup.revel.model.enums.Priority;
-import com.meetup.revel.model.type.PostgresEnumType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,7 +15,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "rv_user_item")
-@TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
 public class UserItem implements Serializable {
 
     @Id
