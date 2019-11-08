@@ -112,6 +112,7 @@ CREATE TABLE rv_event (
   image_filepath VARCHAR(255) NOT NULL
 );
 
+--mapped
 CREATE TABLE rv_message (
   message_id SERIAL PRIMARY KEY,
   sender_id INTEGER NOT NULL,

@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,5 +28,8 @@ public class Chat {
     @JoinColumn(name = "event_id", nullable = false)
     @EqualsAndHashCode.Exclude
     private Event event;
+
+    @OneToMany(mappedBy = "chat", fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Message> messages;
 
 }
