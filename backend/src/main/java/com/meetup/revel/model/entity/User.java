@@ -80,4 +80,8 @@ public class User {
     @OneToMany(mappedBy = "booker", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     private Set<UserItem> bookedItems;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<Like> likes;
 }

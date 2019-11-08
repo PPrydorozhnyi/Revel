@@ -47,7 +47,7 @@ public class Item {
     @EqualsAndHashCode.Exclude
     private Set<UserItem> users;
 
-    //TODO add Likes table
-//    private boolean isLike;
-//    private Integer likes;
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<Like> likes;
 }
