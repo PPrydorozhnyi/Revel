@@ -78,7 +78,6 @@ CREATE TABLE rv_friend (
 );
 
 CREATE TABLE rv_user_event (
-  user_event_id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL,
   event_id INTEGER NOT NULL,
   role rv_role NOT NULL,

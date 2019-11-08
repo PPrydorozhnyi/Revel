@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -21,18 +22,17 @@ import java.io.Serializable;
         uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "event_id"})
 )
 @TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
-public class UserEvent {
+public class UserEvent implements Serializable {
 
     @Id
-    @Column(name = "user_event_id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    @NotNull
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id", nullable = false)
     @EqualsAndHashCode.Exclude
     private User user;
 
+    @Id
+    @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id", nullable = false)
     @EqualsAndHashCode.Exclude
