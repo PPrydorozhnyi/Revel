@@ -120,13 +120,14 @@ CREATE TABLE rv_message (
   chat_id INTEGER NOT NULL
 );
 
-
+--mapped
 CREATE TABLE rv_chat (
   chat_id SERIAL PRIMARY KEY,
   chat_type rv_chat_type NOT NULL,
   event_id INTEGER NOT NULL
 );
 
+--mapped
 CREATE TABLE rv_item_comment (
   comment_id SERIAL PRIMARY KEY,
   body_text VARCHAR(2000) NOT NULL,

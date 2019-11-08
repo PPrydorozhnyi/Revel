@@ -3,6 +3,7 @@ package com.meetup.revel.model.entity;
 import com.meetup.revel.model.enums.ChatType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Chat {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", nullable = false)
+    @EqualsAndHashCode.Exclude
     private Event event;
 
 }

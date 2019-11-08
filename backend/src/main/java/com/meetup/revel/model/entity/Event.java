@@ -67,6 +67,6 @@ public class Event {
     private Folder folder;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, orphanRemoval = true)
-    @EqualsAndHashCode.Include
+    @EqualsAndHashCode.Exclude
     private List<Chat> chats;
 }
