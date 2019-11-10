@@ -1,6 +1,6 @@
 package com.meetup.revel.dao;
 
-import com.meetup.revel.entity.Message;
+import com.meetup.revel.entity.MessageDTO;
 import com.meetup.revel.service.vm.ChatCheckEntity;
 import com.meetup.revel.service.vm.ChatIdsVM;
 
@@ -18,9 +18,9 @@ public interface ChatDao {
 
     //Messages
 
-    Message insertMessage(Message message);
+    MessageDTO insertMessage(MessageDTO messageDTO);
 
-    List<Message> findMessagesByChatId(int chatId);
+    List<MessageDTO> findMessagesByChatId(int chatId);
 
     //Permissions
 

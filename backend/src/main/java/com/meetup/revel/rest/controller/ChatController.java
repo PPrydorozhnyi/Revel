@@ -1,6 +1,6 @@
 package com.meetup.revel.rest.controller;
 
-import com.meetup.revel.entity.Message;
+import com.meetup.revel.entity.MessageDTO;
 import com.meetup.revel.service.ChatService;
 import com.meetup.revel.service.vm.ChatIdsVM;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@RequestMapping(path = "/api/users/{userId}/chats")
+@RequestMapping(path = "/old/api/users/{userId}/chats")
 @PropertySource("classpath:strings.properties")
 public class ChatController {
 
@@ -62,11 +62,11 @@ public class ChatController {
     }
 
     @PostMapping("/message")
-    @PreAuthorize("@chatAuthorization.checkByChatId(#userId, #message.chatId)")
-    public ResponseEntity<Message> addMessage(@PathVariable int userId, @RequestBody Message message) {
-        log.debug("Trying to add message for chat with id '{}'", message.getChatId());
+    @PreAuthorize("@chatAuthorization.checkByChatId(#userId, #messageDTO.chatId)")
+    public ResponseEntity<MessageDTO> addMessage(@PathVariable int userId, @RequestBody MessageDTO messageDTO) {
+        log.debug("Trying to add message for chat with id '{}'", messageDTO.getChatId());
 
-        Message result = chatService.addMessage(message);
+        MessageDTO result = chatService.addMessage(messageDTO);
 
         log.debug("Send response body message '{}' and status CREATED", result.getMessageId());
 
@@ -75,10 +75,10 @@ public class ChatController {
 
     @GetMapping("/messages/{chatId}")
     @PreAuthorize("@chatAuthorization.checkByChatId(#userId, #chatId)")
-    public ResponseEntity<List<Message>> getMessages(@PathVariable int userId, @PathVariable int chatId) {
+    public ResponseEntity<List<MessageDTO>> getMessages(@PathVariable int userId, @PathVariable int chatId) {
         log.debug("Trying to get messages for chat with id '{}'", chatId);
 
-        List<Message> msgList = chatService.getMessagesByChatId(chatId);
+        List<MessageDTO> msgList = chatService.getMessagesByChatId(chatId);
 
         log.debug("Send response body list messages and status OK");
 
@@ -92,7 +92,7 @@ public class ChatController {
 
         List<String> memberLogins = chatService.getUserLogins(chatId);
 
-        log.debug("Received members '{}' from cache by chatId '{}'", chatId);
+        log.debug("Received members '{}' from cache by chatId '{}'", memberLogins, chatId);
 
         return new ResponseEntity<>(memberLogins, HttpStatus.OK);
     }

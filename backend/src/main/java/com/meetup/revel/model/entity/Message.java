@@ -23,7 +23,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "sender_id", nullable = false)
     @EqualsAndHashCode.Exclude
     private User user;
@@ -36,7 +36,7 @@ public class Message {
     @Column(name = "message_date")
     private Date createdWhen;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "chat_id", nullable = false)
     private Chat chat;
 

@@ -2,7 +2,7 @@ package com.meetup.revel.dao.impl;
 
 import com.meetup.revel.dao.ChatDao;
 import com.meetup.revel.dao.rowMappers.MessageRowMapper;
-import com.meetup.revel.entity.Message;
+import com.meetup.revel.entity.MessageDTO;
 import com.meetup.revel.entity.Role;
 import com.meetup.revel.exception.runtime.DatabaseWorkException;
 import com.meetup.revel.exception.runtime.EntityNotFoundException;
@@ -39,24 +39,24 @@ public class ChatDaoImpl implements ChatDao {
     private static final int GET_MESSAGE_LIMIT = 50;
 
     @Override
-    public Message insertMessage(Message message) {
+    public MessageDTO insertMessage(MessageDTO messageDTO) {
         int id;
-        log.debug("Try to insert message '{}'", message);
+        log.debug("Try to insert message '{}'", messageDTO);
 
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate.getDataSource())
                 .withTableName(TABLE_MESSAGE)
                 .usingGeneratedKeyColumns(MESSAGE_MESSAGE_ID);
 
         try {
-            id = simpleJdbcInsert.executeAndReturnKey(MessageRowMapper.paramsMapper(message)).intValue();
-            message.setMessageId(id);
+            id = simpleJdbcInsert.executeAndReturnKey(MessageRowMapper.paramsMapper(messageDTO)).intValue();
+            messageDTO.setMessageId(id);
         } catch (DataAccessException e) {
-            log.error("Query fails by insert message '{}'", message, e);
+            log.error("Query fails by insert message '{}'", messageDTO, e);
             throw new DatabaseWorkException(env.getProperty(EXCEPTION_DATABASE_WORK));
         }
 
-        log.debug("Message '{}' was inserted with id '{}'", message, id);
-        return message;
+        log.debug("Message '{}' was inserted with id '{}'", messageDTO, id);
+        return messageDTO;
     }
 
     @Override
@@ -162,7 +162,7 @@ public class ChatDaoImpl implements ChatDao {
     private int findChatIdByEventIdAndChatTypeId(int eventId, int chatTypeId) {
         int chatId;
 
-        log.debug("Try to find events with eventId '{}' and chatTypeId '{}'", eventId);
+        log.debug("Try to find events with eventId '{}' and chatTypeId '{}'", eventId, chatTypeId);
 
         try {
             List<Integer> chatIds = jdbcTemplate.query(env.getProperty(CHAT_FIND_CHAT_ID_BY_EVENT_ID_AND_CHAT_TYPE_ID),
@@ -177,28 +177,28 @@ public class ChatDaoImpl implements ChatDao {
             throw new DatabaseWorkException(env.getProperty(EXCEPTION_DATABASE_WORK));
         }
 
-        log.debug("Chat '{}' was found by eventId '{}' and chatTypeId '{}'", chatId, eventId);
+        log.debug("Chat '{}' was found by eventId '{}' and chatTypeId '{}'", chatId, eventId, chatTypeId);
 
         return chatId;
     }
 
     @Override
-    public List<Message> findMessagesByChatId(int chatId) {
-        List<Message> messages;
+    public List<MessageDTO> findMessagesByChatId(int chatId) {
+        List<MessageDTO> messageDTOS;
 
         log.debug("Try to find messages with chatId '{}'", chatId);
 
         try {
-            messages = jdbcTemplate.query(env.getProperty(CHAT_FIND_MESSAGES_BY_CHAT_ID),
+            messageDTOS = jdbcTemplate.query(env.getProperty(CHAT_FIND_MESSAGES_BY_CHAT_ID),
                     new Object[]{chatId, GET_MESSAGE_LIMIT}, new MessageRowMapper());
         } catch (DataAccessException e) {
             log.error("Query fails by finding messages with chatId '{}'", chatId, e);
             throw new DatabaseWorkException(env.getProperty(EXCEPTION_DATABASE_WORK));
         }
 
-        log.debug("Chat messages '{}' was found by chatId '{}'", messages, chatId);
+        log.debug("Chat messages '{}' was found by chatId '{}'", messageDTOS, chatId);
 
-        return messages;
+        return messageDTOS;
     }
 
     @Override

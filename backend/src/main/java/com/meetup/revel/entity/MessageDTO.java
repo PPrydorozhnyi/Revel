@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message {
+public class MessageDTO {
     private int messageId;
 
     private int senderId;

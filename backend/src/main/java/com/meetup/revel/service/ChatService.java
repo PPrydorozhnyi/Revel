@@ -1,7 +1,7 @@
 package com.meetup.revel.service;
 
 import com.meetup.revel.dao.ChatDao;
-import com.meetup.revel.entity.Message;
+import com.meetup.revel.entity.MessageDTO;
 import com.meetup.revel.exception.runtime.DeleteException;
 import com.meetup.revel.service.vm.ChatIdsVM;
 import lombok.RequiredArgsConstructor;
@@ -55,24 +55,24 @@ public class ChatService {
         chatDao.deleteChatsByEventId(eventId);
     }
 
-    public Message addMessage(Message message){
-        log.debug("Trying to add message '{}'", message);
+    public MessageDTO addMessage(MessageDTO messageDTO){
+        log.debug("Trying to add message '{}'", messageDTO);
 
-        Message addedMessage = chatDao.insertMessage(message);
+        MessageDTO addedMessageDTO = chatDao.insertMessage(messageDTO);
 
-        log.debug("Message '{}' added successful", addedMessage);
+        log.debug("Message '{}' added successful", addedMessageDTO);
 
-        return addedMessage;
+        return addedMessageDTO;
     }
 
-    public List<Message> getMessagesByChatId(int chatId){
+    public List<MessageDTO> getMessagesByChatId(int chatId){
         log.debug("Trying to get messages by chat id '{}'", chatId);
 
-        List<Message> messages = chatDao.findMessagesByChatId(chatId);
+        List<MessageDTO> messageDTOS = chatDao.findMessagesByChatId(chatId);
 
         log.debug("Messages was received");
 
-        return messages;
+        return messageDTOS;
     }
 
     public void addUserLogin(String login, int chatId) {

@@ -5,4 +5,8 @@ public class CustomRuntimeException extends RuntimeException{
     public CustomRuntimeException(String s) {
         super(s);
     }
+
+    public CustomRuntimeException(Exception e) {
+        super(e);
+    }
 }
