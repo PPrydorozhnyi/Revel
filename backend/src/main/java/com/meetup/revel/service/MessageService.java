@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -18,6 +20,14 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
+    public List<Message> getMessagesByChatId(int chatId){
+        log.debug("Trying to get messages by chat id '{}'", chatId);
 
+        List<Message> messages = messageRepository.findMessagesByChatId(chatId);
+
+        log.debug("Messages was received");
+
+        return messages;
+    }
 
 }
