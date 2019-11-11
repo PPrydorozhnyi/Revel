@@ -24,8 +24,6 @@ public class MailService {
 
     private static Logger log = LoggerFactory.getLogger(MailService.class);
 
-    private static final String HTTP = "http://";
-
     //DOMAIN
 
     private static final String SERVER_DOMAIN = "server.domain";
@@ -55,8 +53,7 @@ public class MailService {
                 .setTo(user.getEmail())
                 .setSubject("Confirmation of registration")
                 .setVariable("name", user.getName())
-                .setVariable("link", HTTP +
-                        environment.getProperty(SERVER_DOMAIN) +
+                .setVariable("link", environment.getProperty(SERVER_DOMAIN) +
                         environment.getProperty(CONFIRM_REGISTRATION_PATH) + token)
                 .setTemplate(environment.getProperty(CONFIRM_REGISTRATION_TEMPLATE))
                 .build();
@@ -77,8 +74,7 @@ public class MailService {
                 .setSubject("Meetup successful registration")
                 .setVariable("name", user.getName() + ' ' + user.getLastname())
                 .setVariable("login", user.getLogin())
-                .setVariable("link", HTTP +
-                        environment.getProperty(SERVER_DOMAIN) +
+                .setVariable("link", environment.getProperty(SERVER_DOMAIN) +
                         environment.getProperty(LOGIN_PATH))
                 .setTemplate(environment.getProperty(REGISTER_MAIL_TEMPLATE))
                 .build();
@@ -98,8 +94,7 @@ public class MailService {
                 .setTo(user.getEmail())
                 .setSubject("Password recovery")
                 .setVariable("name", user.getName())
-                .setVariable("link", HTTP +
-                        environment.getProperty(SERVER_DOMAIN) +
+                .setVariable("link", environment.getProperty(SERVER_DOMAIN) +
                         environment.getProperty(RECOVERY_PATH) + token)
                 .setTemplate(environment.getProperty(RECOVERY_PASSWORD_TEMPLATE))
                 .build();
