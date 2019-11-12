@@ -113,14 +113,14 @@ public class AccountService {
 
         user.setRegisterDate(new Timestamp(System.currentTimeMillis()).toString());
 
-        log.debug("Trying to insert data about user '{}' in database", user.toString());
+        log.debug("Trying to insert data about user '{}' in database", user);
 
         if (userDao.insert(user).getId() == 0) { //checking adding to DB
-            log.error("Error caused by inserting user '{}' to database", user.toString());
+            log.error("Error caused by inserting user '{}' to database", user);
             throw new DatabaseWorkException(env.getProperty(EXCEPTION_DATABASE_WORK));
         }
 
-        log.debug("User '{}' is successfully registered in the system", user.toString());
+        log.debug("User '{}' is successfully registered in the system", user);
     }
 
     public void confirmRegistration(RecoveryPasswordVM model) {
@@ -130,7 +130,7 @@ public class AccountService {
 
         mailService.sendMailSuccessfulRegistration(user);
 
-        log.debug("User '{}' is successfully registered in the system", user.toString());
+        log.debug("User '{}' is successfully registered in the system", user);
     }
 
     public void recoveryPasswordMail(String email) {

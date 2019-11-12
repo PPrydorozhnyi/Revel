@@ -71,7 +71,7 @@ public class MailService {
 
         MimeMessagePreparator messagePreparator = new MailBuilder(templateEngine)
                 .setTo(user.getEmail())
-                .setSubject("Meetup successful registration")
+                .setSubject("Revel successful registration")
                 .setVariable("name", user.getName() + ' ' + user.getLastname())
                 .setVariable("login", user.getLogin())
                 .setVariable("link", environment.getProperty(SERVER_DOMAIN) +
