@@ -131,10 +131,8 @@
 
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc</artifactId>
+			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/ojdbc6.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -178,10 +176,12 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-					<url>http://35.196.76.72/manager/text</url>
+					<url>http://localhost:8090/manager/text</url>
+					<server>TomcatServer</server>
 					<path>/</path>
-					<username>meetup</username>
-					<password>odGbZ93WlkeRM7sQ6v</password>
+					<username>admin</username>
+					<password>password</password>
+					<update>true</update>
 				</configuration>
 			</plugin>
 		</plugins>
