@@ -6,10 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.servlet.http.HttpServletResponse;
-
 /**
- * Used for send {@link User} with token after him authentication {@link AccountController#login(LoginVM loginModel,
+ * Used for send {@link User} with token after him authentication {@link AccountController#login(LoginVM)} (LoginVM loginModel,
         HttpServletResponse response)}.
  */
 @Data

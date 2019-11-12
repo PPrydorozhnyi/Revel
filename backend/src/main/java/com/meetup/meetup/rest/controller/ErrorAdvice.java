@@ -2,7 +2,6 @@ package com.meetup.meetup.rest.controller;
 
 import com.meetup.meetup.exception.runtime.CustomRuntimeException;
 import com.meetup.meetup.exception.runtime.frontend.detailed.FrontendDetailedException;
-import com.meetup.meetup.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @ControllerAdvice
-public class ErrorController {
+public class ErrorAdvice {
 
-    private static Logger log = LoggerFactory.getLogger(ErrorController.class);
+    private static Logger log = LoggerFactory.getLogger(ErrorAdvice.class);
 
     @ExceptionHandler(FrontendDetailedException.class)
     public void sendExceptionInfoToFront(HttpServletResponse response, Exception e) {
         log.error("Exception sent to frontend: ", e);
-        response.setStatus(500);
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         try {
             response.getWriter().print(e.getMessage());
         } catch (IOException e1) {
@@ -40,9 +39,9 @@ public class ErrorController {
     }
 
     private void sendTeapotException(HttpServletResponse response){
-        response.setStatus(418);
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         try {
-            response.getWriter().print("Attention, an attempt to brew coffee with a teapot");
+            response.getWriter().print("Server can not process request");
         } catch (IOException e1) {
             log.error("exception in ErrorController: ", e1);
         }

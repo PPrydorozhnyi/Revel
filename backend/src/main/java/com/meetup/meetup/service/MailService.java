@@ -2,6 +2,7 @@ package com.meetup.meetup.service;
 
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.service.mail.MailBuilder;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.thymeleaf.TemplateEngine;
 import java.io.File;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @PropertySource("classpath:links.properties")
 public class MailService {
 
@@ -42,13 +44,6 @@ public class MailService {
     private final JavaMailSender mailSender;
     private final Environment environment;
     private final TemplateEngine templateEngine;
-
-    @Autowired
-    public MailService(JavaMailSender mailSender, Environment environment, TemplateEngine templateEngine) {
-        this.mailSender = mailSender;
-        this.environment = environment;
-        this.templateEngine = templateEngine;
-    }
 
     @Async
     public void sendMailConfirmationRegistration(User user, String token) {
@@ -76,7 +71,7 @@ public class MailService {
 
         MimeMessagePreparator messagePreparator = new MailBuilder(templateEngine)
                 .setTo(user.getEmail())
-                .setSubject("Meetup successful registration")
+                .setSubject("Revel successful registration")
                 .setVariable("name", user.getName() + ' ' + user.getLastname())
                 .setVariable("login", user.getLogin())
                 .setVariable("link", environment.getProperty(SERVER_DOMAIN) +

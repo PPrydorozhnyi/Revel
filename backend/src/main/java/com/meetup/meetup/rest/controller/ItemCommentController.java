@@ -2,6 +2,7 @@ package com.meetup.meetup.rest.controller;
 
 import com.meetup.meetup.entity.ItemComment;
 import com.meetup.meetup.service.ItemCommentService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/api/comment")
 public class ItemCommentController {
     private static Logger log = LoggerFactory.getLogger(ItemCommentController.class);
 
     private final ItemCommentService itemCommentService;
-
-    @Autowired
-    public ItemCommentController(ItemCommentService itemCommentService) {
-        this.itemCommentService = itemCommentService;
-    }
 
     @GetMapping("{id}")
     public ResponseEntity<ItemComment> getItemCommentById(@PathVariable int id){

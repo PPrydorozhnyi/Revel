@@ -32,6 +32,4 @@ public interface ItemDao extends Dao<Item> {
     List<String> searchTag(String aboutTag);
 
     List<String> getLoginsWhoLikedItem(int itemId);
-
-    boolean itemExistInWishList(Item item);
 }

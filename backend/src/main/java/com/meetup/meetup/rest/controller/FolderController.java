@@ -2,6 +2,7 @@ package com.meetup.meetup.rest.controller;
 
 import com.meetup.meetup.entity.Folder;
 import com.meetup.meetup.service.FolderService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +15,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/api/users/{userId}/folders")
 public class FolderController {
 
     private static Logger log = LoggerFactory.getLogger(FolderController.class);
 
     private final FolderService folderService;
-
-    @Autowired
-    public FolderController(FolderService folderService) {
-        this.folderService = folderService;
-    }
 
     @GetMapping
     @PreAuthorize("@folderAuthorization.isUserCorrect(#userId)")

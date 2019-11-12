@@ -6,12 +6,16 @@ import com.meetup.meetup.exception.runtime.BadTokenException;
 import com.meetup.meetup.exception.runtime.DatabaseWorkException;
 import com.meetup.meetup.exception.runtime.HashAlgorithmException;
 import com.meetup.meetup.exception.runtime.NoTokenException;
-import com.meetup.meetup.exception.runtime.frontend.detailed.*;
+import com.meetup.meetup.exception.runtime.frontend.detailed.EmailAlreadyUsedException;
+import com.meetup.meetup.exception.runtime.frontend.detailed.EmailNotFoundException;
+import com.meetup.meetup.exception.runtime.frontend.detailed.FailedToLoginException;
+import com.meetup.meetup.exception.runtime.frontend.detailed.LoginAlreadyUsedException;
 import com.meetup.meetup.security.AuthenticationFacade;
 import com.meetup.meetup.security.utils.HashMD5;
 import com.meetup.meetup.service.vm.LoginVM;
 import com.meetup.meetup.service.vm.RecoveryPasswordVM;
 import com.meetup.meetup.service.vm.UserAndTokenVM;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,7 @@ import java.sql.Timestamp;
 import static com.meetup.meetup.keys.Key.*;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @PropertySource("classpath:strings.properties")
 public class AccountService {
 
@@ -35,18 +40,7 @@ public class AccountService {
     private final UserDao userDao;
     private final MailService mailService;
     private final AuthenticationFacade authenticationFacade;
-
-    @Autowired
-    private Environment env;
-
-    @Autowired
-    public AccountService(JwtService jwtService, UserDao userDao, MailService mailService, AuthenticationFacade authenticationFacade) {
-        log.info("Initializing AccountService");
-        this.jwtService = jwtService;
-        this.userDao = userDao;
-        this.mailService = mailService;
-        this.authenticationFacade = authenticationFacade;
-    }
+    private final Environment env;
 
     public UserAndTokenVM login(LoginVM credentials) {
         log.debug("Trying to get hash from password");
@@ -119,14 +113,14 @@ public class AccountService {
 
         user.setRegisterDate(new Timestamp(System.currentTimeMillis()).toString());
 
-        log.debug("Trying to insert data about user '{}' in database", user.toString());
+        log.debug("Trying to insert data about user '{}' in database", user);
 
         if (userDao.insert(user).getId() == 0) { //checking adding to DB
-            log.error("Error caused by inserting user '{}' to database", user.toString());
+            log.error("Error caused by inserting user '{}' to database", user);
             throw new DatabaseWorkException(env.getProperty(EXCEPTION_DATABASE_WORK));
         }
 
-        log.debug("User '{}' is successfully registered in the system", user.toString());
+        log.debug("User '{}' is successfully registered in the system", user);
     }
 
     public void confirmRegistration(RecoveryPasswordVM model) {
@@ -136,7 +130,7 @@ public class AccountService {
 
         mailService.sendMailSuccessfulRegistration(user);
 
-        log.debug("User '{}' is successfully registered in the system", user.toString());
+        log.debug("User '{}' is successfully registered in the system", user);
     }
 
     public void recoveryPasswordMail(String email) {

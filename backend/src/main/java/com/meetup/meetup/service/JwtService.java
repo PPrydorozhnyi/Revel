@@ -7,12 +7,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -23,6 +24,7 @@ import static java.time.ZoneOffset.UTC;
 @PropertySource("classpath:image.properties")
 @PropertySource("classpath:jwt.properties")
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class JwtService {
 
     private static Logger log = LoggerFactory.getLogger(JwtService.class);
@@ -32,17 +34,9 @@ public class JwtService {
     private final static String JWT_LOGIN = "jwt.login";
     private final static String JWT_EMAIL = "jwt.email";
 
-    @Autowired
-    private Environment env;
-
+    private final Environment env;
     private final SecretKeyProvider secretKeyProvider;
     private final UserDao userDao;
-
-    @Autowired
-    public JwtService(SecretKeyProvider secretKeyProvider, UserDao userDao) {
-        this.secretKeyProvider = secretKeyProvider;
-        this.userDao = userDao;
-    }
 
     public User verify(String token) {
         log.debug("Trying to get secret key form SecretKeyProvider");
@@ -59,7 +53,7 @@ public class JwtService {
         return userDao.findByLogin(login);
     }
 
-    public User verifyForRecoveryPassword(String token) {
+    User verifyForRecoveryPassword(String token) {
         log.debug("Trying to get secret key form SecretKeyProvider");
 
         byte[] secretKey = secretKeyProvider.getKey();
@@ -74,7 +68,7 @@ public class JwtService {
         return userDao.findByEmail(email);
     }
 
-    public String tokenFor(User user) {
+    String tokenFor(User user) {
         log.debug("Trying to get secret key form SecretKeyProvider");
 
         byte[] secretKey = secretKeyProvider.getKey();
@@ -91,7 +85,7 @@ public class JwtService {
                 .compact();
     }
 
-    public String tokenForConfirmationRegistration(User user) {
+    String tokenForConfirmationRegistration(User user) {
         log.debug("Trying to get secret key form SecretKeyProvider");
 
         byte[] secretKey = secretKeyProvider.getKey();
@@ -108,7 +102,7 @@ public class JwtService {
                 .compact();
     }
 
-    public String tokenForRecoveryPassword(User user) {
+    String tokenForRecoveryPassword(User user) {
         log.debug("Trying to get secret key form SecretKeyProvider");
 
         byte[] secretKey = secretKeyProvider.getKey();

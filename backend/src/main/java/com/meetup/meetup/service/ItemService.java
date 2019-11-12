@@ -5,6 +5,7 @@ import com.meetup.meetup.dao.ItemDao;
 import com.meetup.meetup.dao.UserDao;
 import com.meetup.meetup.entity.Item;
 import com.meetup.meetup.entity.User;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +14,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ItemService {
 
     private static Logger log = LoggerFactory.getLogger(ItemService.class);
 
     private final UserDao userDao;
     private final ItemDao itemDao;
-
-    @Autowired
-    public ItemService(UserDao userDao, ItemDao itemDao) {
-        this.userDao = userDao;
-        this.itemDao = itemDao;
-    }
 
     public Item findByUserIdItemId(int itemId, String ownerLogin) {
         log.debug("Trying to insert item to database");

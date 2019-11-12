@@ -37,10 +37,6 @@ public class EventDaoImpl extends AbstractDao<Event> implements EventDao {
         log = LoggerFactory.getLogger(EventDaoImpl.class);
     }
 
-
-    @Autowired
-    private UserDao userDao;
-
     private static final int OWNER_ID = 1;
     private static final int PARTICIPANT_ID = 2;
 

@@ -1,10 +1,9 @@
 package com.meetup.meetup.rest.controller;
 
-import com.meetup.meetup.entity.Event;
 import com.meetup.meetup.entity.User;
-import com.meetup.meetup.service.EventService;
 import com.meetup.meetup.service.ProfileService;
 import com.meetup.meetup.service.StorageService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/api/profile")
 public class ProfileController {
 
@@ -24,14 +24,6 @@ public class ProfileController {
 
     private final ProfileService profileService;
     private final StorageService storageService;
-    private final EventService eventService;
-
-    @Autowired
-    public ProfileController(ProfileService profileService, StorageService storageService, EventService eventService) {
-        this.profileService = profileService;
-        this.storageService = storageService;
-        this.eventService = eventService;
-    }
 
     @GetMapping("/{login}")
     public ResponseEntity<User> getUserByLogin(@PathVariable String login) {

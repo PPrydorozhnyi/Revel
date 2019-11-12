@@ -4,6 +4,7 @@ import com.meetup.meetup.entity.Event;
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.service.EventImageService;
 import com.meetup.meetup.service.EventService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/api/users/{userId}/events")
 public class EventController {
 
@@ -25,12 +27,6 @@ public class EventController {
     private final EventService eventService;
 
     private final EventImageService eventImageService;
-
-    @Autowired
-    public EventController(EventService eventService, EventImageService eventImageService) {
-        this.eventService = eventService;
-        this.eventImageService = eventImageService;
-    }
 
     @GetMapping
     @PreAuthorize("@eventAuthorization.isUserCorrect(#userId)")
@@ -45,7 +41,7 @@ public class EventController {
     }
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<Event> getEvent(@PathVariable int userId, @PathVariable int eventId) {
+    public ResponseEntity<Event> getEvent(@PathVariable int eventId) {
         log.debug("Trying to get event by id '{}'", eventId);
 
         Event event = eventService.getEvent(eventId);

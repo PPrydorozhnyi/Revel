@@ -3,6 +3,7 @@ package com.meetup.meetup.scheduler;
 import com.meetup.meetup.entity.Event;
 import com.meetup.meetup.exception.runtime.ParseDateException;
 import com.meetup.meetup.service.EventService;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +20,12 @@ import java.util.List;
 import static com.meetup.meetup.keys.Key.EXCEPTION_PARSE_DATE;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EventUpdateScheduler {
 
-    @Autowired
-    private EventService eventService;
+    private final EventService eventService;
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
     private static final Logger log = LoggerFactory.getLogger(EventUpdateScheduler.class);
 
@@ -48,7 +48,7 @@ public class EventUpdateScheduler {
 
     private void updateEvent(Event event){
         log.debug("Updating event '{}'",event);
-        Date eventDate = null;
+        Date eventDate;
         try {
             log.debug("Try to parse event date");
             eventDate = fullDateFormat.parse(event.getEventDate());

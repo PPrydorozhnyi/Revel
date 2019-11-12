@@ -4,6 +4,7 @@ package com.meetup.meetup.rest.controller;
 import com.meetup.meetup.entity.Item;
 
 import com.meetup.meetup.service.StorageService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/api/users/{userId}/items")
 public class ItemController {
 
@@ -25,12 +27,6 @@ public class ItemController {
 
     private final ItemService itemService;
     private final StorageService storageService;
-
-    @Autowired
-    public ItemController(ItemService itemService, StorageService storageService) {
-        this.itemService = itemService;
-        this.storageService = storageService;
-    }
 
     @GetMapping("/{itemId}/login/{login}")
     public ResponseEntity<Item> getItemByUserLoginAndItemId(@PathVariable int userId, @PathVariable int itemId, @PathVariable String login) {

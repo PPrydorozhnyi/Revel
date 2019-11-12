@@ -5,6 +5,7 @@ import com.meetup.meetup.dao.UserDao;
 import com.meetup.meetup.entity.Item;
 import com.meetup.meetup.entity.User;
 import com.meetup.meetup.exception.runtime.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import static com.meetup.meetup.keys.Key.EXCEPTION_ENTITY_NOT_FOUND;
 
 @Service
 @PropertySource("classpath:strings.properties")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WishListService {
 
     private static Logger log = LoggerFactory.getLogger(WishListService.class);
@@ -25,14 +27,6 @@ public class WishListService {
     private final ItemDao itemDao;
     private final UserDao userDao;
     private final Environment env;
-
-    @Autowired
-    public WishListService(ItemDao itemDao, UserDao userDao, Environment env) {
-        this.itemDao = itemDao;
-        this.userDao = userDao;
-        this.env = env;
-    }
-
 
     public List<Item> getWishList(int userId) {
         log.debug("Trying to get all WishList for user '{}'", userId);
