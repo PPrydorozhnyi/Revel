@@ -67,8 +67,10 @@ export class AppComponent {
       });
   }
 
-  login():string{
-    return JSON.parse(localStorage.getItem('currentUser')).login;
-  }
+  login(): string {
+    if (localStorage.length !== 0)
+      return JSON.parse(localStorage.getItem("currentUser")).login;
 
+    return null;
+  }
 }
