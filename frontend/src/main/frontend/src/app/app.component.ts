@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import {Router} from "@angular/router";
-import {Profile} from "./account/profile";
-import {ToastrService} from "ngx-toastr";
+import { Component, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+import { Profile } from "./account/profile";
+import { ToastrService } from "ngx-toastr";
+import { ModalWindow } from "./modal.window/modal.window.component";
 
 
 @Component({
@@ -17,16 +18,22 @@ export class AppComponent {
     console.log("app.component on init")
   }
 
-  constructor(private router : Router, private toastr: ToastrService,){
-    this.router.events.subscribe(event => this.modifyHeader(event),
-      error => this.showError(error,"Error"));
+  @ViewChild(ModalWindow) childComponent: ModalWindow;
+  constructor(private router: Router, private toastr: ToastrService) {
+    this.router.events.subscribe(
+      event => this.modifyHeader(event),
+      error => this.showError(error, "Error")
+    );
   }
 
-  logout(){
+  logout() {
     localStorage.clear();
     this.router.navigate(["/login"]);
   }
 
+  logoutClick() {
+    this.childComponent.show();
+  }
   modifyHeader(location) {
     if (location.url === "/login" || location.url === "/register" || location.url === '/' || location.url === '/continueReg'
     || location.url === "/recovery" || location.url === "/thankyou"
