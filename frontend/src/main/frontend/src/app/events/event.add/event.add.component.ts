@@ -218,4 +218,23 @@ export class EventAddComponent implements OnInit {
     this.lat = event.coords.lat;
   }
 
+  getAddressFromCoord(lat: number, lng: number, searchControl: FormControl) {
+    var geocoder = new google.maps.Geocoder();
+    var latlng = { lat: lat, lng: lng };
+    geocoder.geocode({ location: latlng }, function(results, status) {
+      if (status.toString() === "OK") {
+        if (results[0]) {
+          searchControl.setValue(results[0].formatted_address);
+        } else {
+          window.alert("No results found");
+        }
+      } else {
+        window.alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+
+  submitPosition() {
+    this.getAddressFromCoord(this.lat, this.lng, this.searchControl);
+  }
 }
