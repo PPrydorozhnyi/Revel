@@ -1,22 +1,75 @@
 <div class="list-group py-4" role="tablist">
   <div>
-    <img *ngIf="!profile.imgPath"
-         src="../../../assets/avatar-default.jpg"
-         class="profile-logo">
-    <img *ngIf="profile.imgPath" [src]="profile.imgPath" onError="this.src='assets/avatar-default.jpg'"
-         class="profile-logo">
+    <img
+      *ngIf="!profile.imgPath"
+      src="../../../assets/avatar-default.jpg"
+      class="profile-logo"
+    />
+    <img
+      *ngIf="profile.imgPath"
+      [src]="profile.imgPath"
+      onError="this.src='assets/avatar-default.jpg'"
+      class="profile-logo"
+    />
   </div>
 
-  <a class="list-group-item list-group-item-action" [ngClass]="{'active': states === 'profile'}"
-     href="#/{{profile.login}}/profile">Profile</a>
-  <a class="list-group-item list-group-item-action" [ngClass]="{'active': states === 'friends'}"
-     href="#/{{profile.login}}/friends/">Friends<span *ngIf="friendRequests>0" class="badge badge-pill badge-info">{{friendRequests}}</span></a>
-  <a class="list-group-item list-group-item-action" [ngClass]="{'active': states === 'folders'}"
-     href="#/{{profile.login}}/folders/">Folders</a>
-  <a class="list-group-item list-group-item-action" [ngClass]="{'active': states === 'calendar'}"
-     href="#/{{profile.login}}/calendar/">Calendar</a>
-  <a class="list-group-item list-group-item-action" [ngClass]="{'active': states === 'wishes'}"
-     href="#/{{profile.login}}/wishes/">Wish List</a>
-  <a class="list-group-item list-group-item-action" (click)="logout()"
-     routerLink="/login"> Log Out</a>
+  <a
+    class="list-group-item list-group-item-action"
+    [ngClass]="{ active: states === 'profile' }"
+    href="#/{{ profile.login }}/profile"
+    >Profile</a
+  >
+  <a
+    class="list-group-item list-group-item-action"
+    [ngClass]="{ active: states === 'friends' }"
+    href="#/{{ profile.login }}/friends/"
+    >Friends<span
+      *ngIf="friendRequests > 0"
+      class="badge badge-pill badge-info"
+      >{{ friendRequests }}</span
+    ></a
+  >
+  <a
+    class="list-group-item list-group-item-action"
+    [ngClass]="{ active: states === 'folders' }"
+    href="#/{{ profile.login }}/folders/"
+    >Folders</a
+  >
+  <a
+    class="list-group-item list-group-item-action"
+    [ngClass]="{ active: states === 'calendar' }"
+    href="#/{{ profile.login }}/calendar/"
+    >Calendar</a
+  >
+  <a
+    class="list-group-item list-group-item-action"
+    [ngClass]="{ active: states === 'wishes' }"
+    href="#/{{ profile.login }}/wishes/"
+    >Wish List</a
+  >
+  <a class="list-group-item list-group-item-action" (click)="logoutClick()">
+    Log Out</a
+  >
 </div>
+
+<app-modal-window #modal class="sure-window">
+  <div class="modal-header d-flex justify-content-between align-items-center">
+    <h4 class="modal-title">Attention</h4>
+    <img
+      class="close-btn"
+      src="assets/close.svg"
+      (click)="modal.hide()"
+      alt=""
+      height="20px"
+    />
+  </div>
+  <div class="app-modal-body">
+    <p>Are you sure you want to logout?</p>
+  </div>
+  <div class="app-modal-footer">
+    <button class="btn btn-primary" (click)="modal.hide(); logout()">
+      Yes
+    </button>
+    <button class="btn btn-default" (click)="modal.hide()">Cancel</button>
+  </div>
+</app-modal-window>

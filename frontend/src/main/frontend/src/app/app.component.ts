@@ -35,13 +35,20 @@ export class AppComponent {
     this.childComponent.show();
   }
   modifyHeader(location) {
-    if (location.url === "/login" || location.url === "/register" || location.url === '/' || location.url === '/continueReg'
-    || location.url === "/recovery" || location.url === "/thankyou"
-      || (location.url && (location.url.toString().startsWith("/recovery") || location.url.toString().startsWith("/confirmation"))))
-    {
+    if (
+      location.url === "/login" ||
+      location.url === "/register" ||
+      location.url === "/" ||
+      location.url === "/continueReg" ||
+      location.url === "/recovery" ||
+      location.url === "/thankyou" ||
+      (location.url &&
+        (location.url.toString().startsWith("/recovery") ||
+          location.url.toString().startsWith("/confirmation")))
+    ) {
       this.showLogout = false;
     } else {
-      this.showLogout = true;
+      if (localStorage.length !== 0) this.showLogout = true;
     }
   }
 
