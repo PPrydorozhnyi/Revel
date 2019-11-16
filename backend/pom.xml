@@ -5,7 +5,7 @@
 
 	<artifactId>backend</artifactId>
 
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>revel</name>
 	<description>The Revel backend project</description>
 
@@ -255,10 +255,12 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-					<url>http://35.196.76.72/manager/text</url>
+					<url>http://localhost:8090/manager/text</url>
+					<server>TomcatServer</server>
 					<path>/</path>
-					<username>meetup</username>
-					<password>odGbZ93WlkeRM7sQ6v</password>
+					<username>admin</username>
+					<password>password</password>
+					<update>true</update>
 				</configuration>
 			</plugin>
 		</plugins>

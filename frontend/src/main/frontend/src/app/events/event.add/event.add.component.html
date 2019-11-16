@@ -126,11 +126,24 @@
 
   <div class="col-4">
     <div class="container justify-content-center">
+        <div class="form-group">
       <label>Choose event place:</label>
-      <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="placeMarker($event)">
+          <agm-map
+            [latitude]="lat"
+            [longitude]="lng"
+            (mapClick)="placeMarker($event)"
+          >
         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
       </agm-map>
     </div>
+        <button
+          type="button"
+          (click)="submitPosition()"
+          class="btn btn-primary"
+        >
+          Submit marker position
+        </button>
+      </div>
   </div>
 </div>
 </div>
