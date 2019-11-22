@@ -1,9 +1,9 @@
-import { Component, Input, ViewChild } from "@angular/core";
-import { Profile } from "../profile";
-import { AccountService } from "../account.service";
-import { Router } from "@angular/router";
-import { FriendService } from "../friends/friend.service";
-import { ModalWindow } from "../../modal.window/modal.window.component";
+import {Component, Input, ViewChild} from '@angular/core';
+import {Profile} from "../profile";
+import {AccountService} from "../account.service";
+import {Router} from "@angular/router";
+import {FriendService} from "../friends/friend.service";
+import {ModalWindow} from "../../modal.window/modal.window.component";
 
 @Component({
   selector: 'home-comp',
@@ -17,11 +17,9 @@ export class HomeComponent{
   friendRequests: number;
 
   @ViewChild(ModalWindow) childComponent: ModalWindow;
-  constructor(
-    private accountService: AccountService,
-              private router: Router,
-    private friendService: FriendService
-  ) {
+  constructor(private accountService: AccountService,
+    private router: Router,
+    private friendService: FriendService) {
     this.profile = new Profile();
   }
 
