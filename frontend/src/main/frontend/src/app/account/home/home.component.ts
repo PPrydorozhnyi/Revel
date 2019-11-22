@@ -18,8 +18,8 @@ export class HomeComponent{
 
   @ViewChild(ModalWindow) childComponent: ModalWindow;
   constructor(private accountService: AccountService,
-    private router: Router,
-    private friendService: FriendService) {
+              private router: Router,
+              private friendService: FriendService) {
     this.profile = new Profile();
   }
 
