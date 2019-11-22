@@ -42,6 +42,7 @@ export class AppComponent {
       this.showLogout = false;
     } else {
       this.showLogout = true;
+      if (localStorage.length !== 0) this.showLogout = true;
     }
   }
 

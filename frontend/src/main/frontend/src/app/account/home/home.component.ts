@@ -1,8 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {Profile} from "../profile";
 import {AccountService} from "../account.service";
 import {Router} from "@angular/router";
 import {FriendService} from "../friends/friend.service";
+import {ModalWindow} from "../../modal.window/modal.window.component";
 
 @Component({
   selector: 'home-comp',
@@ -15,6 +16,7 @@ export class HomeComponent{
   profile: Profile;
   friendRequests: number;
 
+  @ViewChild(ModalWindow) childComponent: ModalWindow;
   constructor(private accountService: AccountService,
               private router: Router,
               private friendService: FriendService) {
@@ -29,6 +31,10 @@ export class HomeComponent{
   logout() {
     localStorage.clear();
     this.router.navigate(["/login"]);
+  }
+
+  logoutClick() {
+    this.childComponent.show();
   }
 
   updateRequests() {
