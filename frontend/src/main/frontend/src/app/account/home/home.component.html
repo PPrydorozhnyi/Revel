@@ -17,27 +17,4 @@
      href="#/{{profile.login}}/calendar/">Calendar</a>
   <a class="list-group-item list-group-item-action" [ngClass]="{'active': states === 'wishes'}"
      href="#/{{profile.login}}/wishes/">Wish List</a>
-     <a class="list-group-item list-group-item-action" (click)="logoutClick()">Log Out</a>
 </div>
-
-<app-modal-window #modal class="sure-window">
-  <div class="modal-header d-flex justify-content-between align-items-center">
-    <h4 class="modal-title">Attention</h4>
-    <img
-      class="close-btn"
-      src="assets/close.svg"
-      (click)="modal.hide()"
-      alt=""
-      height="20px"
-    />
-  </div>
-  <div class="app-modal-body">
-    <p>Are you sure you want to logout?</p>
-  </div>
-  <div class="app-modal-footer">
-    <button class="btn btn-primary" (click)="modal.hide(); logout()">
-      Yes
-    </button>
-    <button class="btn btn-default" (click)="modal.hide()">Cancel</button>
-  </div>
-</app-modal-window>
