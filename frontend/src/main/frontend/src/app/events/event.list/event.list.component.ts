@@ -174,6 +174,9 @@ export class EventListComponent implements OnInit {
     this.columns.forEach((column: any) => {
       if (column.filtering) {
         filteredData = filteredData.filter((item: any) => {
+          if(item[column.name] == null)
+            item[column.name] = "";
+
           return item[column.name].match(column.filtering.filterString);
         });
       }
