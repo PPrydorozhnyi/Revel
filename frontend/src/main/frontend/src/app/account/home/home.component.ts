@@ -28,15 +28,6 @@ export class HomeComponent{
     this.updateRequests();
   }
 
-  logout() {
-    localStorage.clear();
-    this.router.navigate(["/login"]);
-  }
-
-  logoutClick() {
-    this.childComponent.show();
-  }
-
   updateRequests() {
     this.friendService.getFriendsRequests().subscribe(requests => this.friendRequests = requests.length);
   }
